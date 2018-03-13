@@ -10,7 +10,7 @@ export default {
   name: 'v-label',
 
   props: {
-    color: String,
+    color: [Boolean, String],
     focused: Boolean,
     for: String,
     value: Boolean
@@ -21,7 +21,10 @@ export default {
       'v-label--active': props.value
     }
 
-    if (props.focused) {
+    console.log(props.focused, props.color)
+
+    if (props.focused && props.color) {
+      console.log('focused')
       classes = Colorable.methods.addTextColorClassChecks(classes, props.color)
     }
 

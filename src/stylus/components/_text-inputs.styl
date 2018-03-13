@@ -1,0 +1,78 @@
+@import '../bootstrap'
+@import '../theme'
+
+v-text-input($material)
+  border-bottom: 1px solid $material.dividers
+
+  input
+    color: $material.text.primary
+
+  &--is-disabled
+    .v-input__label,
+    input
+      color: $material.text.disabled
+
+    &:before
+      background-image: linear-gradient(
+        to right,
+        $material.text.disabled 0,
+        $material.text.disabled 33%,
+        transparent 0
+      )
+
+theme(v-text-input, "v-text-input")
+
+.v-text-input
+  align-items: flex-end
+  color: inherit
+  display: flex
+  margin-top: 16px
+  position: relative
+  width: 100%
+
+  &:before,
+  &:after
+    bottom: -1px
+    content: ''
+    height: 2px
+    left: 0
+    position: absolute
+    transition: $primary-transition
+    width: 100%
+
+  &:before
+    background-color: transparent
+    background-position: bottom
+    background-repeat: repeat-x
+    background-size: 3px 1px
+
+  &:after
+    background-color: currentColor
+    transform: scaleX(0)
+
+  input
+    flex: 1 1 auto
+    font-size: 16px
+    height: 32px
+    padding: 8px 0 8px
+    line-height: 32px
+    width: 100%
+
+    &:focus,
+    &:active
+      outline: none
+
+  .v-label
+    position: absolute
+    min-height: 8px
+    pointer-events: none
+    position: absolute
+    top: calc(50% - 8px)
+    transform-origin: top left
+    transition: .3s $transition.swing
+
+    &--active
+      transform: translate(0, -19px) scale(.75)
+
+  &--is-focused:after
+      transform: scaleX(1)

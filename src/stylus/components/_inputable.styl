@@ -3,28 +3,9 @@
 
 /* Theme */
 v-input($material)
-  input
-    color: $material.text.primary
-
-  &--is-disabled
-    .v-input__label,
-    input
-      color: $material.text.disabled
-
-    .v-input__wrapper:before
-      background-image: linear-gradient(
-        to right,
-        $material.text.disabled 0,
-        $material.text.disabled 33%,
-        transparent 0
-      )
-
   &__icon--clear
     background-color: $material.dividers
     color: $material.icons.active
-
-  &__wrapper
-    border-bottom: 1px solid $material.dividers
 
 theme(v-input, "v-input")
 
@@ -49,18 +30,6 @@ theme(v-input, "v-input")
   &--is-disabled
     .v-input__wrapper
       border-color: transparent
-
-  input
-    flex: 1 1 auto
-    font-size: 16px
-    height: 32px
-    padding: 8px 0 8px
-    line-height: 32px
-    width: 100%
-
-    &:focus,
-    &:active
-      outline: none
 
   &__append-inner,
   &__append-outer,
