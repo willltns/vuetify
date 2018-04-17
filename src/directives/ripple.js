@@ -9,6 +9,7 @@ const ripple = {
    * @param {Element} el
    * @param {{ class?: string, center?: boolean }} [value={}]
    */
+  /* eslint-disable max-statements */
   show: (e, el, value = {}) => {
     if (!el._ripple || !el._ripple.enabled) {
       return
@@ -24,20 +25,24 @@ const ripple = {
       container.className += ` ${value.class}`
     }
 
+    const offset = el.getBoundingClientRect()
+    const localX = e.clientX - offset.left
+    const localY = e.clientY - offset.top
     const size = el.clientWidth > el.clientHeight
       ? el.clientWidth
       : el.clientHeight
+    const distanceFromCenter = Math.sqrt((localX - (el.clientWidth / 2))**2 + (localY - (el.clientHeight / 2))**2)
+    const extraBuffer = 10 // to make sure we're covering the whole element
     animation.className = 'ripple__animation'
-    animation.style.width = `${size * (value.center ? 1 : 2)}px`
+    animation.style.width = `${size + (value.center ? 0 : (distanceFromCenter * 2) + extraBuffer)}px`
     animation.style.height = animation.style.width
 
     el.appendChild(container)
     const computed = window.getComputedStyle(el)
     if (computed.position !== 'absolute' && computed.position !== 'fixed') el.style.position = 'relative'
 
-    const offset = el.getBoundingClientRect()
-    const x = value.center ? '50%' : `${e.clientX - offset.left}px`
-    const y = value.center ? '50%' : `${e.clientY - offset.top}px`
+    const x = value.center ? '50%' : `${localX}px`
+    const y = value.center ? '50%' : `${localY}px`
 
     animation.classList.add('ripple__animation--enter')
     animation.classList.add('ripple__animation--visible')
@@ -46,7 +51,7 @@ const ripple = {
 
     setTimeout(() => {
       animation.classList.remove('ripple__animation--enter')
-      style(animation, `translate(-50%, -50%) translate(${x}, ${y})  scale3d(0.99,0.99,0.99)`)
+      style(animation, `translate(-50%, -50%) translate(${x}, ${y}) scale3d(0.99,0.99,0.99)`)
     }, 0)
   },
 
