@@ -162,3 +162,19 @@ export function filterChildren (array = [], tag) {
 export function convertToUnit (str, unit = 'px') {
   return isNaN(str) ? str : `${Number(str)}${unit}`
 }
+
+const ICONS_PREFIX = '$vuetify.icons.'
+
+// This remaps internal names like '$vuetify.icons.cancel' to the current name
+// for that icon. Note the parent component is needed for $vuetify because
+// VIcon is a functional component. This function only looks at the
+// immediate parent, so it won't remap for a nested functional components.
+export function remapInternalIcon (parent, iconName) {
+  if (!iconName.startsWith(ICONS_PREFIX)) {
+    // return original icon name unchanged
+    return iconName
+  }
+
+  // Now look up icon indirection name, e.g. '$vuetify.icons.cancel':
+  return getObjectValueByPath(parent, iconName) || iconName
+}
