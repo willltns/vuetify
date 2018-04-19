@@ -23,7 +23,8 @@ const ICONS_MATERIAL = {
   'radioOff': 'radio_button_unchecked',
   'edit': 'edit',
   'ratingEmpty': 'star_border',
-  'ratingFull': 'star'
+  'ratingFull': 'star',
+  'ratingHalf': 'star_half'
 }
 
 // Maps internal Vuetify icon names to actual icons from materialdesignicons.com
