@@ -75,6 +75,9 @@ declare interface VuetifyIcons {
   radioOn: string
   radioOff: string
   edit: string
+  ratingEmpty: string
+  ratingFull: string
+  ratingHalf: string
 }
 
 declare interface VuetifyApplication {
