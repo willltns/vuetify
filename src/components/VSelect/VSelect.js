@@ -143,6 +143,7 @@ export default {
 
           this.isMenuActive = false
           this.isFocused = false
+          this.editingIndex = -1
           this.selectedIndex = -1
         },
         args: {
@@ -173,7 +174,7 @@ export default {
       return this.chips || this.smallChips
     },
     hasSlot () {
-      return Boolean(this.hasChips || this.$slots.item)
+      return Boolean(this.hasChips || this.$scopedSlots.selection)
     },
     isDirty () {
       return this.selectedItems.length > 0
@@ -511,6 +512,7 @@ export default {
         this.isMenuActive = true
       }
 
+      this.editingIndex = -1
       this.selectedIndex = -1
     },
     onClick () {
